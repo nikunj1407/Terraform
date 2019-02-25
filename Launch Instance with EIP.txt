@@ -1,0 +1,17 @@
+provider "aws"
+{
+access_key = "${var.access_key}"
+secret_key = "${var.secret_key}"
+region = "${var.region}"
+}
+resource "aws_instance" "Test1"
+{
+ami = "ami-0d907a0f49b3c1bf0"
+key_name = "Test-server"
+instance_type = "t2.micro"
+subnet_id = "subnet-621f3e15"
+}
+resource "aws_eip" "ip"
+{
+instance = "${aws_instance.Test1.id}"
+}
